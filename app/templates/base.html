@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}PriceSwitch{% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="dot"></span> PriceSwitch</div>
+    <nav class="nav">
+      <a href="/" class="{% block nav_dash %}{% endblock %}">Dashboard</a>
+      <a href="/settings" class="{% block nav_settings %}{% endblock %}">Settings</a>
+      {% if auth_enabled %}<a href="/logout">Logout</a>{% endif %}
+    </nav>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="foot">PriceSwitch v{{ version }} &middot; Energy price GPIO switch</footer>
+  <div id="toast" class="toast"></div>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

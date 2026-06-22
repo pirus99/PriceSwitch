@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login &middot; PriceSwitch</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="login-wrap">
+    <form class="card login-card" method="post" action="/login">
+      <div class="brand" style="margin-bottom: 18px;">
+        <span class="dot"></span> PriceSwitch
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" autofocus required />
+      </div>
+      {% if error %}<p style="color:#fca5a5; margin: 4px 0 12px;">{{ error }}</p>{% endif %}
+      <button class="btn" type="submit" style="width:100%;">Sign in</button>
+    </form>
+  </div>
+  <footer class="foot">PriceSwitch v{{ version }}</footer>
+</body>
+</html>

@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block title %}Settings &middot; PriceSwitch{% endblock %}
+{% block nav_settings %}active{% endblock %}
+
+{% block content %}
+<form id="settings-form">
+  <!-- Mode -->
+  <h2 class="section-title">Operating Mode</h2>
+  <div class="card">
+    <div class="field">
+      <label>Mode</label>
+      <div class="segmented" id="mode-toggle">
+        <button type="button" data-mode="AUTO">AUTO</button>
+        <button type="button" data-mode="MANUAL">MANUAL</button>
+      </div>
+      <span class="hint">AUTO follows the price logic. MANUAL lets you pick the output directly.</span>
+    </div>
+    <input type="hidden" name="mode" id="mode" value="AUTO" />
+
+    <div class="field" id="manual-output-field" style="display:none;">
+      <label>Manual Output</label>
+      <div class="segmented" id="manual-toggle">
+        <button type="button" data-out="HIGH">HIGH</button>
+        <button type="button" data-out="LOW">LOW</button>
+      </div>
+      <span class="hint">Only used in MANUAL mode. High and Low are mutually exclusive.</span>
+    </div>
+    <input type="hidden" name="manual_output" id="manual_output" value="HIGH" />
+  </div>
+
+  <!-- Provider -->
+  <h2 class="section-title">Price Source</h2>
+  <div class="card">
+    <div class="form-grid">
+      <div class="field">
+        <label for="provider">Provider</label>
+        <select id="provider" name="provider"></select>
+        <span class="hint" id="provider-hint"></span>
+      </div>
+      <div class="field">
+        <label for="zone">Zone / Market area</label>
+        <input type="text" id="zone" name="zone" />
+        <span class="hint" id="zone-hint"></span>
+      </div>
+      <div class="field">
+        <label for="poll_interval">Poll interval (seconds)</label>
+        <input type="number" id="poll_interval" name="poll_interval" min="10" max="86400" />
+        <span class="hint">How often the price is fetched (min 10s).</span>
+      </div>
+    </div>
+    <p class="hint" id="key-warning" style="display:none; color:#fcd34d;"></p>
+  </div>
+
+  <!-- Switch logic -->
+  <h2 class="section-title">Switch Logic</h2>
+  <div class="card">
+    <div class="form-grid">
+      <div class="field">
+        <label for="switch_price">Switch price (c/kWh)</label>
+        <input type="number" step="0.01" id="switch_price" name="switch_price" />
+        <span class="hint">Price ≤ this turns the LOW output ON.</span>
+      </div>
+      <div class="field">
+        <label for="threshold">Threshold (c/kWh)</label>
+        <input type="number" step="0.01" min="0" id="threshold" name="threshold" />
+        <span class="hint">Switch back to HIGH only when price &gt; switch price + threshold.</span>
+      </div>
+      <div class="field">
+        <label for="hysteresis_seconds">Hysteresis (seconds)</label>
+        <input type="number" min="0" max="86400" id="hysteresis_seconds" name="hysteresis_seconds" />
+        <span class="hint">Lockout time between switch events.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GPIO -->
+  <h2 class="section-title">GPIO Outputs (BCM numbering)</h2>
+  <div class="card">
+    <div class="form-grid">
+      <div class="field">
+        <label for="gpio_high">High-price output pin</label>
+        <input type="number" min="0" max="27" id="gpio_high" name="gpio_high" />
+        <span class="hint">Energised when price is high.</span>
+      </div>
+      <div class="field">
+        <label for="gpio_low">Low-price output pin</label>
+        <input type="number" min="0" max="27" id="gpio_low" name="gpio_low" />
+        <span class="hint">Energised when price is low. Must differ from High pin.</span>
+      </div>
+    </div>
+    <p class="hint">Active-high/low and other electrical settings are configured in <code>.env</code>.</p>
+  </div>
+
+  <!-- Log retention -->
+  <h2 class="section-title">Log Retention</h2>
+  <div class="card">
+    <div class="form-grid">
+      <div class="field">
+        <label for="retention_value">Keep logs for</label>
+        <input type="number" min="0" id="retention_value" name="retention_value" />
+        <span class="hint">0 = keep forever. Older events are auto-deleted.</span>
+      </div>
+      <div class="field">
+        <label for="retention_unit">Unit</label>
+        <select id="retention_unit" name="retention_unit">
+          <option value="weeks">Weeks</option>
+          <option value="months">Months</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+  <div class="pill-row">
+    <button type="submit" class="btn">Save settings</button>
+    <button type="button" class="btn secondary" id="reload-btn">Reload</button>
+    <span class="muted" id="save-status"></span>
+  </div>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/settings.js"></script>
+{% endblock %}

@@ -1,0 +1,17 @@
+[Unit]
+Description=PriceSwitch - Energy price GPIO switch
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/PriceSwitch
+ExecStart=/home/pi/PriceSwitch/.venv/bin/python run.py
+Restart=on-failure
+RestartSec=5
+# gpiozero needs access to GPIO; the 'gpio' group is standard on Raspberry Pi OS.
+SupplementaryGroups=gpio
+
+[Install]
+WantedBy=multi-user.target

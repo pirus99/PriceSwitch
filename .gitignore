@@ -1,1 +1,19 @@
 .copilot-specs-cache/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Local config & data (never commit secrets or runtime state)
+.env
+config.json
+*.db
+*.log
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
