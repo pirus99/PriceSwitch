@@ -49,7 +49,7 @@ a { color: var(--accent); text-decoration: none; }
 }
 
 .title .text { 
-  @media (max-width: 400px) { display: none; }
+  @media (max-width: 452px) { display: none; }
 }
 
 .nav { display: flex; gap: 8px; align-items: center; }
