@@ -103,3 +103,20 @@ function tick() {
 
 tick();
 setInterval(tick, REFRESH_MS);
+
+// Burger menu toggle
+const burger = document.getElementById("burger");
+const nav = document.getElementById("nav");
+if (burger && nav) {
+  burger.addEventListener("click", () => {
+    burger.classList.toggle("active");
+    nav.classList.toggle("mobile-open");
+  });
+  // Close menu when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!burger.contains(e.target) && !nav.contains(e.target)) {
+      burger.classList.remove("active");
+      nav.classList.remove("mobile-open");
+    }
+  });
+}

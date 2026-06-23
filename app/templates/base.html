@@ -5,15 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}PriceSwitch{% endblock %}</title>
   <link rel="stylesheet" href="/static/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="topbar">
     <div class="title"><span class="dot">⏻</span> <div class="text">PriceSwitch</div></div>
-    <nav class="nav">
+    <nav class="nav" id="nav">
       <a href="/" class="{% block nav_dash %}{% endblock %}">Dashboard</a>
       <a href="/settings" class="{% block nav_settings %}{% endblock %}">Settings</a>
       {% if auth_enabled %}<a href="/logout">Logout</a>{% endif %}
     </nav>
+    <button class="burger" id="burger" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </header>
 
   <main class="container">

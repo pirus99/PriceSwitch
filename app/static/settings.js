@@ -131,6 +131,22 @@ function init() {
   document.getElementById("settings-form").addEventListener("submit", saveSettings);
   document.getElementById("reload-btn").addEventListener("click", loadSettings);
 
+  // Burger menu toggle
+  const burger = document.getElementById("burger");
+  const nav = document.getElementById("nav");
+  if (burger && nav) {
+    burger.addEventListener("click", () => {
+      burger.classList.toggle("active");
+      nav.classList.toggle("mobile-open");
+    });
+    document.addEventListener("click", (e) => {
+      if (!burger.contains(e.target) && !nav.contains(e.target)) {
+        burger.classList.remove("active");
+        nav.classList.remove("mobile-open");
+      }
+    });
+  }
+
   loadProviders().then(loadSettings);
 }
 

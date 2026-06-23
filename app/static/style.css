@@ -18,7 +18,7 @@
 
 body {
   margin: 0;
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-family: "Noto Sans", system-ui, -apple-system, sans-serif;
   background: linear-gradient(160deg, #0b1220, #0f172a 40%, #131c30);
   color: var(--text);
   min-height: 100vh;
@@ -63,6 +63,46 @@ a { color: var(--accent); text-decoration: none; }
 }
 .nav a:hover { background: var(--bg-card); color: var(--text); }
 .nav a.active { background: var(--accent); color: #06283d; }
+
+/* Burger menu */
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 20;
+}
+.burger span {
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: all 0.25s;
+}
+.burger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger.active span:nth-child(2) { opacity: 0; }
+.burger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav.mobile-open {
+  display: flex !important;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: var(--shadow);
+  min-width: 180px;
+}
+.nav.mobile-open a {
+  width: 100%;
+  text-align: center;
+}
 
 .container {
   max-width: 1100px;
@@ -147,6 +187,10 @@ input[type="text"], input[type="number"], input[type="password"], select {
   padding: 10px 12px;
   font-size: 0.95rem;
   width: 100%;
+  /* Ensure long option text does not cause overflow */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 input:focus, select:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
 
@@ -199,4 +243,25 @@ input:focus, select:focus { outline: 2px solid var(--accent); border-color: var(
 @media (max-width: 600px) {
   .stat .value { font-size: 1.5rem; }
   .topbar { padding: 12px 16px; }
+}
+
+@media (max-width: 370px) {
+  .nav { display: none; }
+  .burger { display: flex; }
+}
+
+/* Settings page responsive adjustments for very small screens */
+@media (max-width: 360px) {
+  .form-grid {
+    /* Stack fields vertically */
+    grid-template-columns: 1fr !important;
+  }
+  .card {
+    /* Reduce padding to fit screen */
+    padding: 12px;
+  }
+  .field {
+    /* Slightly reduce bottom margin */
+    margin-bottom: 8px;
+  }
 }
