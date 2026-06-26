@@ -25,7 +25,7 @@ body {
   margin: 0;
   font-family: "Noto Sans", system-ui, -apple-system, sans-serif;
   /* Bright amber‑red gradient background */
-  background: linear-gradient(160deg, var(--amber), var(--red) 40%, #2d2d2d);
+  background: linear-gradient(160deg, var(--amber), var(--red) 60%, #2d2d2d);
   color: var(--text);
   min-height: 100vh;
 }
@@ -38,7 +38,7 @@ a { color: var(--accent); text-decoration: none; }
   justify-content: space-between;
   padding: 16px 24px;
   /* Use a semi‑transparent amber accent for the header */
-  background: rgba(245, 158, 11, 0.85);
+  background: linear-gradient(-160deg, var(--red), var(--amber) 60%, #2d2d2dd2);
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(8px);
   position: sticky;
@@ -65,7 +65,7 @@ a { color: var(--accent); text-decoration: none; }
   font-weight: 600;
   transition: all 0.15s;
 }
-.nav a:hover { background: rgb(172, 0, 0); color: var(--text); }
+.nav a:hover { background: var(--amber); color: var(--text); border: 1.2px solid black }
 .nav a.active {
   /* Dark red background matching the darker theme */
   background: linear-gradient(160deg, var(--amber), var(--red) 40%, #2d2d2d);
