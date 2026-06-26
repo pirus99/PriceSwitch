@@ -1,18 +1,23 @@
-# PriceSwitch
+# PriceSwitch: Energy-Price-Based GPIO Relay Control for Raspberry Pi (2B+)
 
-Energy-price based GPIO switch for the Raspberry Pi (2B+ and up).
-PriceSwitch polls a live electricity spot price, compares it against a
-user-defined **switch price**, and drives two mutually-exclusive relay
-outputs (`HIGH` and `LOW`). A modern web interface provides a live
-dashboard and a friendly settings page.
+**PriceSwitch** polls live electricity spot prices, compares them against a user-defined **switch price**, and drives two mutually exclusive relay outputs (`HIGH`/`LOW`). A modern web interface provides a live dashboard and an intuitive settings page.
+
+## Project Goal
+Control large electric consumers to use energy when it’s cheapest. By toggling relays, nearly any appliance can be managed—no smart capabilities required. Examples:
+- Air conditioning/cooling systems
+- Heating elements in buffer containers
+- Battery or EV chargers
+
+### Dashboard
+
+<img width="1918" height="908" alt="PriceSwitch_Dashboard" src="https://github.com/user-attachments/assets/1ce69811-c6b9-4e0d-949e-b75127e14a9e" />
 
 ## Features
 
 - **Live dashboard** – switch mode, output status, current price, price age,
   and a switch-event log.
-- **Settings page** (no raw JSON) – provider, zone, poll interval, switch
-  price, threshold, hysteresis, GPIO pins, AUTO/MANUAL mode, manual output,
-  and log retention.
+- **Settings page** All important Settings can be accessed over 
+  the Web Interface, Security Settings are only available over .env file.
 - **Multiple price providers**, preferring free/no-key sources:
   | Provider | Tier | Key |
   |----------|------|-----|
@@ -44,14 +49,14 @@ manual `HIGH`/`LOW` selection.
 ## Install (Raspberry Pi)
 
 ```bash
-git clone <your-repo-url> PriceSwitch
+git clone https://github.com/pirus99/PriceSwitch PriceSwitch
 cd PriceSwitch
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 
 cp .env.example .env
-# edit .env: set SECRET_KEY, AUTH_REQUIRED/AUTH_PASSWORD, GPIO_ACTIVE_LOW, tokens
+# edit .env: set SECRET_KEY, AUTH_REQUIRED/AUTH_PASSWORD, GPIO_ACTIVE_LOW, tokens (only if needed)
 python run.py
 ```
 
