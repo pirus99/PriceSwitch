@@ -14,21 +14,19 @@ Control large electric consumers to use energy when it’s cheapest. By toggling
 
 ## Features
 
-- **Live dashboard** – switch mode, output status, current price, price age,
-  and a switch-event log.
-- **Settings page** All important Settings can be accessed over 
+- **Live dashboard** - Displays all important information in a compact View.
+- **Settings page** - All important Settings can be accessed over 
   the Web Interface, Security Settings are only available over .env file.
-- **Multiple price providers**, preferring free/no-key sources:
+- **Multiple price providers** - The application supports multiple price providers
   | Provider | Tier | Key |
   |----------|------|-----|
   | Elecz.com Spot (ENTSO-E) | free | no |
   | aWATTar (DE/AT) | free | no |
   | Tibber (current price) | free | yes (`TIBBER_TOKEN`) |
   | ENTSO-E Transparency | free | yes (`ENTSOE_TOKEN`) |
-- **Safe GPIO control** – `HIGH` and `LOW` are never energised at the same
-  time. Active-high/low is configurable in `.env`.
-- **Runs anywhere** – automatically simulates GPIO when not on a Pi, so you
-  can develop on Windows/macOS/Linux.
+- **Price Hysterisis/Threshold** - A switch back threshold can be set to switch back to High output 
+  on a slightly Higher price than the actual set Switch Price, also a Timeout can be 
+  set that needs to expire before a new Switch event could happen.
 - **SQLite event log** with automatic retention cleanup (weeks/months).
 - Optional **password login**.
 
